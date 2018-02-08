@@ -14,8 +14,11 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.DAO.RoleDAO;
 import com.niit.DAO.UserDAO;
+import com.niit.DAOImpl.RoleDAOImpl;
 import com.niit.DAOImpl.UserDAOImpl;
+import com.niit.Model.Role;
 import com.niit.Model.User;
 
 @Configuration
@@ -54,6 +57,7 @@ public class HibernateConfig {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
 		sessionBuilder.addAnnotatedClass(User.class);
+		sessionBuilder.addAnnotatedClass(Role.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 	@Autowired
@@ -64,8 +68,14 @@ public class HibernateConfig {
 		return transactionManager;
 	}
 	@Autowired(required = true)
-	@Bean(name = "UserDao")
+	@Bean(name = "UserDAO")
 	public UserDAO getUserDAO(SessionFactory sessionFactory) {
 		return new UserDAOImpl(sessionFactory);
+	}
+	
+	@Autowired(required = true)
+	@Bean(name = "RoleDAO")
+	public RoleDAO getRoleDAO(SessionFactory sessionFactory) {
+		return new RoleDAOImpl(sessionFactory);
 	}
 }
