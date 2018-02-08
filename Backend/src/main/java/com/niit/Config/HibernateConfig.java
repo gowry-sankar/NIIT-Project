@@ -16,12 +16,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.DAO.CategoryDAO;
 import com.niit.DAO.RoleDAO;
+import com.niit.DAO.SupplierDAO;
 import com.niit.DAO.UserDAO;
 import com.niit.DAOImpl.CategoryDAOImpl;
 import com.niit.DAOImpl.RoleDAOImpl;
+import com.niit.DAOImpl.SupplierDAOImpl;
 import com.niit.DAOImpl.UserDAOImpl;
 import com.niit.Model.Category;
 import com.niit.Model.Role;
+import com.niit.Model.Supplier;
 import com.niit.Model.User;
 
 @Configuration
@@ -62,6 +65,7 @@ public class HibernateConfig {
 		sessionBuilder.addAnnotatedClass(User.class);
 		sessionBuilder.addAnnotatedClass(Role.class);
 		sessionBuilder.addAnnotatedClass(Category.class);
+		sessionBuilder.addAnnotatedClass(Supplier.class);
 		
 		return sessionBuilder.buildSessionFactory();
 	}
@@ -87,5 +91,10 @@ public class HibernateConfig {
 	@Bean(name = "Category")
 	public CategoryDAO getCategoryDAO(SessionFactory sessionFactory) {
 		return new CategoryDAOImpl(sessionFactory);
+	}
+	@Autowired(required = true)
+	@Bean(name = "Supplier")
+	public SupplierDAO getSupplierDAO(SessionFactory sessionFactory) {
+		return new SupplierDAOImpl(sessionFactory);
 	}
 }
