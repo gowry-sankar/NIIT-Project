@@ -14,6 +14,8 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.DAO.UserDAO;
+import com.niit.DAOImpl.UserDAOImpl;
 import com.niit.Model.User;
 
 @Configuration
@@ -51,7 +53,7 @@ public class HibernateConfig {
 
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
-	
+		sessionBuilder.addAnnotatedClass(User.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 	@Autowired
@@ -60,5 +62,10 @@ public class HibernateConfig {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
 
 		return transactionManager;
+	}
+	@Autowired(required = true)
+	@Bean(name = "UserDao")
+	public UserDAO getUserDAO(SessionFactory sessionFactory) {
+		return new UserDAOImpl(sessionFactory);
 	}
 }
