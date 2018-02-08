@@ -14,19 +14,25 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.DAO.CartDAO;
 import com.niit.DAO.CategoryDAO;
 import com.niit.DAO.ProductDAO;
 import com.niit.DAO.RoleDAO;
+import com.niit.DAO.ShipmentDAO;
 import com.niit.DAO.SupplierDAO;
 import com.niit.DAO.UserDAO;
+import com.niit.DAOImpl.CartDAOImpl;
 import com.niit.DAOImpl.CategoryDAOImpl;
 import com.niit.DAOImpl.ProductDAOImpl;
 import com.niit.DAOImpl.RoleDAOImpl;
+import com.niit.DAOImpl.ShipmentDAOImpl;
 import com.niit.DAOImpl.SupplierDAOImpl;
 import com.niit.DAOImpl.UserDAOImpl;
+import com.niit.Model.Cart;
 import com.niit.Model.Category;
 import com.niit.Model.Product;
 import com.niit.Model.Role;
+import com.niit.Model.Shipment;
 import com.niit.Model.Supplier;
 import com.niit.Model.User;
 
@@ -70,6 +76,8 @@ public class HibernateConfig {
 		sessionBuilder.addAnnotatedClass(Category.class);
 		sessionBuilder.addAnnotatedClass(Supplier.class);
 		sessionBuilder.addAnnotatedClass(Product.class);
+		sessionBuilder.addAnnotatedClass(Shipment.class);
+		sessionBuilder.addAnnotatedClass(Cart.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 	@Autowired
@@ -104,6 +112,16 @@ public class HibernateConfig {
 	@Bean(name = "Product")
 	public ProductDAO getProductDAO(SessionFactory sessionFactory) {
 		return new ProductDAOImpl(sessionFactory);
+	}
+	@Autowired(required = true)
+	@Bean(name = "Shipment")
+	public ShipmentDAO getShipmentDAO(SessionFactory sessionFactory) {
+		return new ShipmentDAOImpl(sessionFactory);
+	}
+	@Autowired(required = true)
+	@Bean(name = "Cart")
+	public CartDAO getCartDAO(SessionFactory sessionFactory) {
+		return new CartDAOImpl(sessionFactory);
 	}
 	
 }
