@@ -89,4 +89,19 @@ body {
 		<div id="product" class="col-sm-12">
 			<p class="Latest">Supplier</p>
 	</div>
+  <c:forEach items="${supplierList}" var="supplier" varStatus="status">
+<div class="col-sm-2">
+					<div id="f1_container1">
+						<div id="f1_card1" class="shadow">
+							<div class="front face">
+								<img class="alb" src="resources/Supplier/${supplier.supplierId}.jpeg"/>
+							</div>
+							<div class="back face center">
+								<p class="proname">${supplier.supplierName}</p>
+								<p><a href="displayproduct?suppliername=${supplier.supplierName}"><button type="submit" class="btn btn-warning btn-md">View</button></a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+  </c:forEach>
 </body>

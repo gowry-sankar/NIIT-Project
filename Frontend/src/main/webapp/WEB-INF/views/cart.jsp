@@ -59,7 +59,45 @@ margin-top: 250px;
 				<th class="text-right">SubTotal</th>
 				<th class="text-center">Action</th>
 			</tr>
-					</form>
+			<c:forEach items="${cartitems}" var="cartitem">
+				<tr style="margin-top: 10px; margin-right: 30px;!important"
+					class="item-row">
+					<td><ahref="productdescription?productId=${cartitem.productId}"><img
+							alt="${cartitem.productName}"
+							src="resources/product/${cartitem.productId}.jpeg" width="100px"
+							; height="100px;"></a></td>
+					<td style="text-align: left;">${cartitem.productName}</td>
+					<td style="text-align: right;">
+					<a href="decreaseQty?itemId=${cartitem.itemId}"><span class="glyphicon glyphicon-minus"> </span></a>
+					<input type="text" name="quantity" value="${cartitem.qty}" min="1" id="quantity" style="width: 36px; text-align: center;" />
+					<a href="increaseQty?itemId=${cartitem.itemId}"><span class="glyphicon glyphicon-plus"> </span></a>
+					</td>
+					<td style="text-align: right;">&#36;${cartitem.price}</td>
+					<td style="text-align: right;">&#36;${cartitem.price * cartitem.qty}</td>
+					<td class="col-sm-1 col-md-1"><a
+						href="removeCart?itemId=${cartitem.itemId} "
+						class="btn btn-danger"> <span
+							class="glyphicon glyphicon-remove"></span> Remove
+					</a></td>
+				</tr>
+			</c:forEach>
+			<tr>
+				<td colspan="4" class="text-right" style="font-weight: bold;">Total</td>
+				<td style="text-align: right;">&#36;${grandtotal}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="4" class="text-left"><a href="index"
+					class="btn btn-info"> <span
+						class="glyphicon glyphicon-shopping-cart"></span> Continue
+						Shopping
+				</a></td>
+				<td colspan="2" class="text-right"><a href="proceed"
+					class="btn btn-success"> checkout <span
+						class="glyphicon glyphicon-play"></span>
+				</a></td>
+			</tr>
+			</form>
 		</table>
 	</div>
 </body>

@@ -65,4 +65,19 @@ padding-bottom: 5px;
 </head>
 <body>
 	<br>
- </body>
+  <c:forEach items="${product}" var="product" varStatus="status">
+<div class="col-sm-2">
+					<div id="f1_container1">
+						<div id="f1_card1" class="shadow">
+							<div class="front face">
+								<img class="pro" src="resources/product/${product.productId}.jpeg" />
+							</div>
+							<div class="back face center">
+								<p class="proname">${product.productName}</p>
+								<p><a href="productdescription?productId=${product.productId}"><button type="submit" class="btn btn-warning btn-md"></span>View</button></a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+  </c:forEach>
+</body>

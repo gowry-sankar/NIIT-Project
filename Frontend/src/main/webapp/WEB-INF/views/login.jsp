@@ -38,8 +38,10 @@
 				 <br>
    <!--  <label class="control-label col-sm-offset-2 col-sm-3" for="password"></label>
     <div class="col-sm-3">  -->
+				 <c:if test="${not empty error}">
 				<div class="error"><b>${error}</b></div>
-	 			
+	 			</c:if> 
+				<c:if test="${not empty logout}">
 			<div class="msg"><b>${logout}</b></div>
 				</c:if>				
 				<b>${message}</b><br>

@@ -49,21 +49,26 @@ h5{
   <h5>Price: &#8377; ${product.price}</h5>
  <span style="color: white;"> ${message}</span>
 
-  	
-    
+  	<c:if test="${empty OutofStock}">
+    <c:if test="${pageContext.request.userPrincipal.name == null }">
   <p><a href="login"><button class="btn btn-success">Add To Cart</button></a></p>
   <p><a href="index"><button align="left" class="btn btn-danger">Go Back</button></a></p>
-  
-    
+  </c:if>
+    <c:if test="${pageContext.request.userPrincipal.name != null }">
   <p><a href="addtocart?productId=${product.productId}"><button class="btn btn-success">Add To Cart</button></a></p>
   <p><a href="afterlogin"><button align="right" class="btn btn-danger">Go Back</button></a></p> 
-  
+  </c:if>
+  </c:if>
+    	<c:if test="${not empty OutofStock}">
+    <c:if test="${pageContext.request.userPrincipal.name == null }">
   <p><button class="btn btn-warning">Out of Stock</button></p>
   <p><a href="index"><button align="right" class="btn btn-danger">Go Back</button></a></p>
-  
+  </c:if>
+    <c:if test="${pageContext.request.userPrincipal.name != null }">
   <p><button class="btn btn-warning">Out of Stock</button></p>
   <p><a href="afterlogin"><button align="right" class="btn btn-danger">Go Back</button></a></p> 
-  
+  </c:if>
+  </c:if>
   
 </div>
 <div id=marginbot></div>

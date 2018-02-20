@@ -87,30 +87,30 @@ body {
 </head>
 <body>
 <%@ include file="Header.jsp"%>
-
+<c:if test="${not empty DisplayByFeatured}">
 		<div id="albums" class="col-sm-12">
 			<p class="Latest">Featured Products</p>
 	</div>
-
-
+</c:if>
+<c:if test="${empty DisplayByFeatured}">
 		<div id="albums" class="col-sm-12">
 			<p class="Latest">Products</p>
 	</div>
-
-
+</c:if>
+<c:forEach items="${product}" var="product" varStatus="status">
 <div class="col-sm-2">
 					<div id="f1_container1">
 						<div id="f1_card1" class="shadow">
 							<div class="front face">
-								
+								<img class="alb" src="resources/product/${product.productId}.jpeg" />
 							</div>
 							<div class="back face center">
-								<p class="proname">{product.productName}</p>
+								<p class="proname">${product.productName}</p>
 								<p class="proprice">&#8377; ${product.price}</p>
-								<p><a href="productdescription?productId={product.productId}"><button type="submit" class="btn btn-warning btn-md">View</button></a></p>
+								<p><a href="productdescription?productId=${product.productId}"><button type="submit" class="btn btn-warning btn-md">View</button></a></p>
 							</div>
 						</div>
 					</div>
 				</div>
-				
+				</c:forEach>
 </body>

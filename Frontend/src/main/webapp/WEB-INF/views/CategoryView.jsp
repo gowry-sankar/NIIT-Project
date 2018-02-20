@@ -120,5 +120,17 @@ margin-left: 20px;
 		
   </tr>
   
- </table>
+  <c:forEach items="${categoryList}" var="category" varStatus="status">
+		<tr>
+			<td>${status.count}</td>
+			<td>${category.categoryId}</td>
+			<td>${category.categoryName}</td>
+			<td>${category.categoryDescription}</td>
+			<td><a href="EditCategory?categoryId=${category.categoryId}"><span
+									class="glyphicon glyphicon-pencil"></span></a></td>
+			<td><a href="DeleteCategory?categoryId=${category.categoryId}" onclick="return confirm('Are You Sure? Do you Want Delete Category : ${category.categoryName} ?')"><span
+									class="glyphicon glyphicon-trash"></span></a></td>
+		</tr>
+	</c:forEach>
+</table>
 </body>

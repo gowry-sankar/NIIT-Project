@@ -131,6 +131,29 @@ color: blue;
 			<th class="text-center">Delivery</th>
 			<th class="text-center">Status</th>
 		</tr>
+		<c:forEach items="${cartitems}" var="cartitem" varStatus="status">
+			<tr style="margin-top: 10px; margin-right: 30px;!important"
+				class="item-row">
+				<td>${status.count}</td>
+				<td style="text-align: center;">${cartitem.userName}</td>
+				<td style="text-align: center;">${cartitem.cartId}</td>
+				<td style="text-align: center;">${cartitem.productName}</td>
+				<td style="text-align: center;">${cartitem.cuDate}</td>
+				<td style="text-align: center;">${cartitem.qty}</td>
+				<td style="text-align: center;">&#8377;${cartitem.price}</td>
+				<td style="text-align: center;">&#8377;${cartitem.total}</td>
+				<td style="text-align: center;">${cartitem.dDate}</td>				
+				<c:if test="${cartitem.days>=3}">
+					<td style="text-align: center; color:limegreen;">Shipped</td>
+				</c:if>
+				<c:if test="${cartitem.days<=0}">
+					<td style="text-align: center; color:skyblue;">Delivered</td>
+				</c:if>
+				<c:if test="${cartitem.days>=1 && cartitem.days<=2}">
+					<td style="text-align: center; color:lightred;">In Transit</td>
+				</c:if>
+			</tr>
+		</c:forEach>
 		</table>
 </body>
 </html>

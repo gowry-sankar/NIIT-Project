@@ -121,9 +121,10 @@ margin-bottom: 150px;
 	</div>
 	</div>
 	</div>
-		
+		<c:if test="${size == 0}">
 			<h2 class="text-center" id="txxt" >No Previous Orders...</h2>
-		
+		</c:if>
+		<c:if test="${size != 0}">
 		<table class="responstable">
 			<tr>
 				<th align="center">S.No</th>
@@ -133,7 +134,7 @@ margin-bottom: 150px;
 				<th class="text-center">SubTotal</th>
 				<th class="text-center">Status</th>
 			</tr>
-			
+			<c:forEach items="${cartitems}" var="cartitem" varStatus="status">
 				<tr style="margin-top: 5px; margin-center: 20px;!important"
 					class="item-row">
 					<td>${status.count}</td>
@@ -141,12 +142,17 @@ margin-bottom: 150px;
 					<td style="text-align: center;">${cartitem.qty}</td>				
 					<td style="text-align: center;">&#8377;${cartitem.price}</td>
 					<td style="text-align: center;">&#8377;${cartitem.price * cartitem.qty}</td>
-					
+					<c:if test="${cartitem.days<=0}">
 						<td style="text-align: center; color:limegreen;">Delivered</td>
+					</c:if>
+					<c:if test="${cartitem.days>=3}">
 						<td style="text-align: center; color:limegreen;">Shipped</td>
+					</c:if>
+					<c:if test="${cartitem.days>=1 && cartitem.days<=2}">
 						<td style="text-align: center; color:navyblue;">In Transit</td>
-					
+					</c:if>
+
 				</tr>
-			
+			</c:forEach>
 		</table>
-		
+		</c:if>
